@@ -1,0 +1,68 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : COL_ProcéduresGlobales
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x10aa34f30010eeb7
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  type_code : 31
+  p_codes : []
+  procedures :
+   -
+     name : GèreNotifications
+     internal_properties : CAAAAAgAAABOYKW9miQPfxnMsOIFOLtfOiRJvuS7s9MX6HrZvcGkAI5F2/KsB+tBvd0D+ntyAEpXRLJFma4FfUAAhyBnLIyWVZkfNdILdD+LrmGR2Uw0RpZODY+kw0GN9JW6B2SvhA7t+ZEFR1DVQeJ5vtLzMcERy2wJ1uFS3L4QueKv7H7755KRosjOJZPBxAV5GHFDivaDyA7PZw==
+     procedure_id : 1200830490405306857
+     type_code : 15
+     code : |1+
+      
+      // Résumé : Gère les notifications dans un thread persistant
+      // 
+      PROCEDURE GèreNotifications()
+      
+      tantque gbActif
+      	// Affiche la notification
+      	AfficheNotification()
+      	
+      	// On patiente le temps de la périodicité définie
+      	ChronoDébut(1) 
+      	tantque gbActif _et_ ((ChronoValeur(1) / 1000) < gnPériodicité)
+      		Multitâche(50)
+      	FIN
+      	ChronoFin(1)
+      FIN
+     type : 458752
+   -
+     name : AfficheNotification
+     procedure_id : 1200832461795361725
+     type_code : 15
+     code : |1-
+      // Résumé : Affiche une notification
+      // 
+      PROCEDURE AfficheNotification()
+      
+      sHeure est une chaine = HeureVersChaîne(HeureSys(),"HH:MM:SS")
+      
+      NotifSupprime(gNotificationPonctuelle)
+      gNotificationPonctuelle..Message = ChaîneConstruit("Il est %1",sHeure)
+      gNotificationPonctuelle..TexteDéroulant = sHeure
+      gNotificationPonctuelle..Titre = sHeure
+      
+      NotifAjoute(gNotificationPonctuelle)
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_SansNom1
+resources :
+ string_res :
+  identifier : 0x1fc4ffcc066360f6
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ
